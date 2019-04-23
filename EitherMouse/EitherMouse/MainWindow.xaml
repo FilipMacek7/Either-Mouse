@@ -5,11 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EitherMouse"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="200">
+        Title="MainWindow" Height="450" Width="200" Closing="Window_Closing">
     <Grid>
         <StackPanel>
-            <TextBlock Text="Mouse speed:" Name="mousespeedtext"></TextBlock>
+            <TextBlock TextWrapping="Wrap" Text="Loaded profile" Name="loadedprofiletext"/>
+            <Button Content="Load" Width="50" Click="Load_Profile"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="Profile name" Name="profilename"/>
+            <Button Content="Save" Width="50" Click="Save_Profile"/>
+            <TextBlock Text="Mouse speed:" Name="speedtext"></TextBlock>
             <Slider Name="speedslider" Maximum="20" ValueChanged="SpeedValue_Changed" Thumb.DragCompleted="SpeedValue_Completed"></Slider>
+            <TextBlock Text="Double click speed:" Name="doubleclicktext"></TextBlock>
+            <Slider Name="doubleclickslider" Maximum="20" ValueChanged="DoubleClickValue_Changed" Thumb.DragCompleted="DoubleClickValue_Completed"></Slider>
+            <TextBlock Text="Scroll lines:" Name="scrolllinestext"></TextBlock>
+            <Slider Name="scrolllinesslider" Maximum="20" ValueChanged="ScrollLinesValue_Changed" Thumb.DragCompleted="ScrollLinesValue_Completed"></Slider>
         </StackPanel>
+        <TextBlock TextWrapping="Wrap" Text="Info" VerticalAlignment="Bottom" Height="50" Name="info"/>
     </Grid>
 </Window>
