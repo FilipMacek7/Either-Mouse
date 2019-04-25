@@ -114,7 +114,7 @@ namespace EitherMouse
             if (openFileDialog.ShowDialog() == true)
             {
                 Profile loadedprofile = JsonConvert.DeserializeObject<Profile>(File.ReadAllText(openFileDialog.FileName));
-                loadedprofiletext.Text = loadedprofile.Name;
+                loadedprofiletext.Text = "Loaded profile:" + loadedprofile.Name;
                 speedslider.Value = loadedprofile.Speed;
                 speedtext.Text = "Mouse speed: " + speedslider.Value;
                 doubleclickslider.Value = loadedprofile.DoubleClick;

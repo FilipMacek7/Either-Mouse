@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:EitherMouse"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="200" Closing="Window_Closing">
-    <Grid>
+    <Grid Margin="10">
         <StackPanel>
-            <TextBlock TextWrapping="Wrap" Text="Loaded profile" Name="loadedprofiletext"/>
+            <TextBlock TextWrapping="Wrap" Text="Loaded profile: " Name="loadedprofiletext"/>
             <Button Content="Load" Width="50" Click="Load_Profile"/>
             <TextBox Height="23" TextWrapping="Wrap" Text="Profile name" Name="profilename"/>
             <Button Content="Save" Width="50" Click="Save_Profile"/>
