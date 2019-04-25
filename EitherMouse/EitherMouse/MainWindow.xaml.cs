@@ -38,20 +38,33 @@ namespace EitherMouse
             uint pvParam,
             uint fWinIni);
 
-
         public const uint SPI_GETMOUSESPEED = 0x0070;
         public const uint SPI_GETWHEELSCROLLLINES = 0x0068;
         public const uint SPI_SETDOUBLECLICKTIME = 0x0020;
         public const uint SPI_SETMOUSESPEED = 0x0071;
         public const uint SPI_SETWHEELSCROLLLINES = 0x0069;
-        public MainWindow()
+        [DllImport("user32.dll")]
+        static extern uint GetDoubleClickTime();
+        unsafe public MainWindow()
         {
             InitializeComponent();
-            speedslider.Value = SPI_GETMOUSESPEED;
+            int speed;
+            SystemParametersInfo(
+                SPI_GETMOUSESPEED,
+                0,
+                (uint)new IntPtr(&speed),
+                0);
+            speedslider.Value = speed;
             speedtext.Text = "Mouse speed: " + speedslider.Value.ToString();
-            doubleclickslider.Value = 10000;
+            doubleclickslider.Value = GetDoubleClickTime();
             doubleclicktext.Text = "Double click speed: " + doubleclickslider.Value.ToString();
-            scrolllinesslider.Value = SPI_GETWHEELSCROLLLINES;
+            int scroll;
+            SystemParametersInfo(
+                SPI_GETWHEELSCROLLLINES,
+                0,
+                (uint)new IntPtr(&scroll),
+                0);
+            scrolllinesslider.Value = scroll;
             scrolllinestext.Text = "Scroll lines: " + scrolllinesslider.Value.ToString();
 
         }
@@ -98,7 +111,6 @@ namespace EitherMouse
         private void Load_Profile(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "Json (*.json)|*.txt|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
                 Profile loadedprofile = JsonConvert.DeserializeObject<Profile>(File.ReadAllText(openFileDialog.FileName));
@@ -107,7 +119,8 @@ namespace EitherMouse
                 speedtext.Text = "Mouse speed: " + speedslider.Value;
                 doubleclickslider.Value = loadedprofile.DoubleClick;
                 doubleclicktext.Text = "Double click speed: " + doubleclickslider.Value;
-
+                scrolllinesslider.Value = loadedprofile.Scroll;
+                scrolllinestext.Text = "Scroll lines: " + scrolllinesslider.Value;
             }
         }
     }

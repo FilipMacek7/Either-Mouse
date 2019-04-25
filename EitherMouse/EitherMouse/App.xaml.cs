@@ -27,7 +27,7 @@ namespace EitherMouse
         private void exit(object sender, EventArgs e)
         {
             SystemParametersInfo(SPI_SETMOUSESPEED, 0, 6, 0);
-            SystemParametersInfo(SPI_SETDOUBLECLICKTIME, 5000, 0, 0);
+            SystemParametersInfo(SPI_SETDOUBLECLICKTIME, 500, 0, 0);
             SystemParametersInfo(SPI_SETWHEELSCROLLLINES, 3, 0, 0);
             System.Windows.Application.Current.Shutdown();
         }
@@ -48,10 +48,13 @@ namespace EitherMouse
         public const uint SPI_SETDOUBLECLICKTIME = 0x0020;
         public const uint SPI_SETMOUSESPEED = 0x0071;
         public const uint SPI_SETWHEELSCROLLLINES = 0x0069;
+
+        [DllImport("user32.dll")]
+        static extern uint GetDoubleClickTime();
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             SystemParametersInfo(SPI_SETMOUSESPEED, 0, 6, 0);
-            SystemParametersInfo(SPI_SETDOUBLECLICKTIME, 5000, 0, 0);
+            SystemParametersInfo(SPI_SETDOUBLECLICKTIME, 500, 0, 0);
             SystemParametersInfo(SPI_SETWHEELSCROLLLINES, 3, 0, 0);
         }
     }
